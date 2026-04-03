@@ -14,6 +14,9 @@ public class Prodotto implements Serializable {
     private String immagine;     
     private boolean isCancellato; 
     private int categoriaId;      // chiave esterna
+    private String colore;
+    private String formato;
+    private String marchio;
 
     public Prodotto() {
     }
@@ -83,6 +86,31 @@ public class Prodotto implements Serializable {
     public void setCategoriaId(int categoriaId) {
         this.categoriaId = categoriaId;
     }
+    public String getColore() {
+        return colore;
+    }
+
+    public void setColore(String colore) {
+        this.colore = colore;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+    
+    public String getMarchio() {
+        return marchio;
+    }
+
+    public void setMarchio(String marchio) {
+        this.marchio = marchio;
+    }
+
+
 
     @Override
     public String toString() {

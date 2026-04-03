@@ -1,30 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="it.unisa.model.*, java.util.*" %>
 
-<jsp:include page="header.jsp" />
+<% 
+    Collection<Prodotto> prodotti = (Collection<Prodotto>) request.getAttribute("prodotti");
+%>
 
-    <h1>Benvenuto/a su GlowUp Makeup 💄</h1>
-    <p>Scopri subito i nostri prodotti migliori!</p>
+<jsp:include page="header.jsp" />
 
     <hr>
     
     <h2>Prodotti in Vetrina</h2>
-    
-    <%
-        // codice temporaneo per testare le prime funzionalità
-        ProdottoDAO dao = new ProdottoDAO();
-        Collection<Prodotto> prodotti = dao.doRetrieveAll(null);
-    %>
 
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <% for(Prodotto p : prodotti) { %>
-            <div style="border: 1px solid #ccc; background: white; padding: 15px; border-radius: 10px; width: 200px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
-                <img src="images/<%= p.getImmagine() %>" alt="<%= p.getNome() %>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 5px;">
+    <div class="prodotti-grid">
+        <% 
+     
+        if (prodotti != null && !prodotti.isEmpty()) {
+            for(Prodotto p : prodotti) { 
+        %>
+            <div class="prodotto-card">
+              <a href="DettaglioServlet?id=<%= p.getId() %>";>
+                <img src="images/<%= p.getImmagine() %>" alt="<%= p.getNome() %>" class="prodotto-img">
+                
+                <p class="marchio-prodotto"><%= p.getMarchio() != null ? p.getMarchio() : "" %></p>
                 
                 <h3><%= p.getNome() %></h3>
-                <p style="color: #d63384; font-weight: bold;"><%= p.getPrezzo() %> &euro;</p>
-                <button style="background-color: #d63384; color: white; border: none; padding: 10px; width: 100%; cursor: pointer;">Aggiungi al Carrello</button>
+                
+                <p class="dettagli-prodotto">
+                   <%= (p.getColore() != null && !p.getColore().isEmpty()) ? p.getColore() : "" %> 
+                   <%= (p.getFormato() != null && !p.getFormato().isEmpty()) ? " | " + p.getFormato() : "" %></p>
+                
+                
+                <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
+                
+                <button class="btn-carrello">Aggiungi al Carrello</button>
             </div>
+        <% 
+            } 
+        } else { 
+        %>
+            <p style="text-align:center;">Nessun prodotto disponibile al momento.</p>
         <% } %>
     </div>
 

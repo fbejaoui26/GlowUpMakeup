@@ -14,7 +14,7 @@ public class ProdottoDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO prodotto (nome, descrizione, prezzo, quantita, immagine, is_cancellato, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO prodotto (nome, descrizione, prezzo, quantita, immagine, is_cancellato, categoria_id, colore, formato, marchio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -27,6 +27,9 @@ public class ProdottoDAO {
             preparedStatement.setString(5, product.getImmagine());
             preparedStatement.setBoolean(6, false); // di default non è cancellato
             preparedStatement.setInt(7, product.getCategoriaId());
+            preparedStatement.setString(8, product.getColore());
+            preparedStatement.setString(9, product.getFormato());
+            preparedStatement.setString(10, product.getMarchio());
 
             preparedStatement.executeUpdate();
 
@@ -67,6 +70,10 @@ public class ProdottoDAO {
                 bean.setQuantita(rs.getInt("quantita"));
                 bean.setImmagine(rs.getString("immagine"));
                 bean.setCategoriaId(rs.getInt("categoria_id"));
+                bean.setColore(rs.getString("colore"));
+                bean.setFormato(rs.getString("formato"));
+                bean.setMarchio(rs.getString("marchio"));
+
             }
 
         } finally {
@@ -109,6 +116,9 @@ public class ProdottoDAO {
                 bean.setQuantita(rs.getInt("quantita"));
                 bean.setImmagine(rs.getString("immagine"));
                 bean.setCategoriaId(rs.getInt("categoria_id"));
+                bean.setColore(rs.getString("colore"));
+                bean.setFormato(rs.getString("formato"));
+                bean.setMarchio(rs.getString("marchio"));
 
                 products.add(bean);
             }
