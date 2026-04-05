@@ -2,7 +2,6 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,8 @@ import it.unisa.model.ProdottoDAO;
 
 @WebServlet("/DettaglioServlet")
 public class DettaglioServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         int id = Integer.parseInt(request.getParameter("id"));
