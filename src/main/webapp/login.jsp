@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp" />
 
 <div class="form-container">
-    <h2>Accedi a GlowUp Makeup</h2>
+    <h2>Accedi a GlowUp Makeup!</h2>
     
     <% if (request.getAttribute("erroreLogin") != null) { %>
         <p class="messaggio-errore errore-globale"><%= request.getAttribute("erroreLogin") %></p>

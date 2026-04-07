@@ -32,7 +32,7 @@
                 
                 <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> &euro;</p>
                 
-                <button class="btn-carrello">Aggiungi al Carrello</button>
+                <a href="CarrelloServlet?action=aggiungi&id=<%= p.getId() %>" class="btn-carrello">Aggiungi al Carrello</a>
             </div>
         <% 
             } 

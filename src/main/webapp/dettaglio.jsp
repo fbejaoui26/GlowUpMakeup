@@ -30,12 +30,13 @@
             <p class="descrizione-testo"><%= p.getDescrizione() != null ? p.getDescrizione() : "Nessuna descrizione disponibile." %></p>
             
             <form action="CarrelloServlet" method="post" class="form-acquisto">
-                <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
-                
-                <label for="quantita">Quantità:</label>
-                <input type="number" name="quantita" id="quantita" value="1" min="1" max="<%= p.getQuantita() %>" class="input-quantita">
-                
-                <button type="submit" class="btn-carrello btn-grande">Aggiungi al Carrello 🛒</button>
+             <input type="hidden" name="action" value="aggiungi">
+             <input type="hidden" name="id" value="<%= p.getId() %>">
+    
+             <label for="quantita">Quantità:</label>
+             <input type="number" name="quantita" id="quantita" value="1" min="1" max="<%= p.getQuantita() %>" class="input-quantita">
+    
+             <button type="submit" class="btn-carrello btn-grande">Aggiungi al Carrello</button>
             </form>
         </div>
 
