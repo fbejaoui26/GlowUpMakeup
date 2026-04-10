@@ -56,6 +56,15 @@ public class Carrello {
         return totale;
     }
     
+ // Aggiungi questo in it.unisa.model.Carrello
+    public int getNumeroElementiTotali() {
+        int totale = 0;
+        for (ElementoCarrello elemento : elementi) {
+            totale += elemento.getQuantita();
+        }
+        return totale;
+    }
+    
     // svuota completamente il carrello (da usare dopo l'acquisto o al logout)
     public void svuota() {
         elementi.clear();

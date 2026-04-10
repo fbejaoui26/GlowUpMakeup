@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="/WEB-INF/header.jsp" />
 
 <div class="form-container">
     <h2>Registrati a GlowUp Makeup!</h2>
     
-    <form id="formRegistrazione" action="RegistrazioneServlet" method="post">
+    <c:if test="${not empty erroreRegistrazione}">
+        <p class="messaggio-errore errore-globale">${erroreRegistrazione}</p>
+    </c:if>
+
+    <form id="formRegistrazione" action="${pageContext.request.contextPath}/RegistrazioneServlet" method="post">
         
         <div class="form-group">
             <label for="nome">Nome:</label>
@@ -34,6 +40,6 @@
     </form>
 </div>
 
-<script src="script/validazione.js"></script>
+<script src="${pageContext.request.contextPath}/script/validazione.js"></script>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/footer.jsp" />

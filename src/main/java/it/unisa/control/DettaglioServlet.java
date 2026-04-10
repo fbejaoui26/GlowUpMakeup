@@ -14,23 +14,37 @@ import it.unisa.model.ProdottoDAO;
 
 @WebServlet("/DettaglioServlet")
 public class DettaglioServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        int id = Integer.parseInt(request.getParameter("id"));
-        ProdottoDAO dao = new ProdottoDAO();
-        
         try {
+            // controllo che l'ID sia stato passato e sia un numero valido
+            String idString = request.getParameter("id");
+            if (idString == null || idString.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/HomeServlet");
+                return;
+            }
+            
+            int id = Integer.parseInt(idString);
+            ProdottoDAO dao = new ProdottoDAO();
             
             Prodotto prodotto = dao.doRetrieveByKey(id);
             
-            request.setAttribute("prodottoSingolo", prodotto);
-            request.getRequestDispatcher("dettaglio.jsp").forward(request, response);
+            // se il prodotto non esiste, torna alla home
+            if (prodotto == null) {
+                response.sendRedirect(request.getContextPath() + "/HomeServlet");
+                return;
+            }
             
+            request.setAttribute("prodottoSingolo", prodotto);
+            request.getRequestDispatcher("/WEB-INF/dettaglio.jsp").forward(request, response);
+            
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/HomeServlet");
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("HomeServlet"); // se c'è un errore, torna alla home
+            response.sendRedirect(request.getContextPath() + "/HomeServlet"); 
         }
     }
 }

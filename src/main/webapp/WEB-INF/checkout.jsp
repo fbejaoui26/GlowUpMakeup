@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="it.unisa.model.Utente" %>
-<%
-    // controllo accessi
-    Utente utente = (Utente) session.getAttribute("utenteLoggato");
-    if (utente == null) {
-        request.setAttribute("erroreLogin", "Devi effettuare l'accesso per poter completare l'acquisto.");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-        return;
-    }
-%>
-<jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="/WEB-INF/header.jsp" />
 
 <div class="form-container">
     <h2>Dettagli di Spedizione e Pagamento</h2>
     
-    <form id="formCheckout" action="CheckoutServlet" method="post">
+    <c:if test="${not empty erroreCheckout}">
+        <p class="messaggio-errore errore-globale">${erroreCheckout}</p>
+    </c:if>
+    
+    <form id="formCheckout" action="${pageContext.request.contextPath}/CheckoutServlet" method="post">
         
         <h3>Indirizzo di Spedizione</h3>
         <div class="form-group">
@@ -46,6 +42,6 @@
     </form>
 </div>
 
-<script src="script/validazioneCheckout.js"></script>
+<script src="${pageContext.request.contextPath}/script/validazioneCheckout.js"></script>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/footer.jsp" />

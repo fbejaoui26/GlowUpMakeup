@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="/WEB-INF/header.jsp" />
 
 <div class="form-container">
     <h2>Accedi a GlowUp Makeup!</h2>
-    
-    <% if (request.getAttribute("erroreLogin") != null) { %>
-        <p class="messaggio-errore errore-globale"><%= request.getAttribute("erroreLogin") %></p>
-    <% } %>
+ 
+    <c:if test="${not empty erroreLogin}">
+        <p class="messaggio-errore errore-globale">${erroreLogin}</p>
+    </c:if>
 
-    <form id="formLogin" action="LoginServlet" method="post">
+    <form id="formLogin" action="${pageContext.request.contextPath}/LoginServlet" method="post">
         
         <div class="form-group">
             <label for="emailLogin">Email:</label>
@@ -26,6 +28,6 @@
     </form>
 </div>
 
-<script src="script/validazioneLogin.js"></script>
+<script src="${pageContext.request.contextPath}/script/validazioneLogin.js"></script>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/footer.jsp" />

@@ -6,3 +6,5 @@
 
 </body>
 </html>
+
+<script src="${pageContext.request.contextPath}/script/ajax-carrello.js"></script>

@@ -50,4 +50,8 @@ public class Utente {
  public void setRuolo(String ruolo) {
   this.ruolo = ruolo;
  }
+ 
+ public boolean isAdmin() {
+     return "admin".equalsIgnoreCase(this.ruolo) || "amministratore".equalsIgnoreCase(this.ruolo);
+ }
 }

@@ -21,7 +21,7 @@ public class DriverManagerConnectionPool {
 
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
-		String url = "jdbc:mysql://localhost:3306/glowup_makeup?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String url = "jdbc:mysql://localhost:3306/glowup_makeup?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8";
 		String username = "root"; // 
 		String password = "bejaoui.26."; 
 
