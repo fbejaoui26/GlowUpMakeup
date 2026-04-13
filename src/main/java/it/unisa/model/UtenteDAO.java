@@ -18,6 +18,8 @@ public class UtenteDAO {
    connection = DriverManagerConnectionPool.getConnection();
    preparedStatement = connection.prepareStatement(insertSQL);
    
+   connection.setAutoCommit(false);
+   
    preparedStatement.setString(1, utente.getEmail());
    preparedStatement.setString(2, utente.getPassword()); 
    preparedStatement.setString(3, utente.getNome());

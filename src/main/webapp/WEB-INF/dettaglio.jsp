@@ -8,39 +8,44 @@
     <div class="dettaglio-container">
         
         <div class="dettaglio-img-box">
-            <%-- Context Path per l'immagine --%>
             <img src="${pageContext.request.contextPath}/images/${prodottoSingolo.immagine}" alt="${prodottoSingolo.nome}" class="img-grande">
         </div>
 
         <div class="dettaglio-info-box">
-            <p class="marchio-prodotto">${not empty prodottoSingolo.marchio ? prodottoSingolo.marchio : ''}</p>
-            <h1>${prodottoSingolo.nome}</h1>
-            <p class="dettagli-extra">
-                ${not empty prodottoSingolo.colore ? prodottoSingolo.colore : ''} 
-                ${not empty prodottoSingolo.formato ? ' | '.concat(prodottoSingolo.formato) : ''}
-            </p>
-
-            <p class="prezzo-grande">
-                <fmt:formatNumber value="${prodottoSingolo.prezzo}" type="number" minFractionDigits="2" maxFractionDigits="2"/> &euro;
-            </p>
             
-            <hr>
+            <div class="info-header">
+                <p class="marchio-dettaglio">${not empty prodottoSingolo.marchio ? prodottoSingolo.marchio : ''}</p>
+                <h1>${prodottoSingolo.nome}</h1>
+                <p class="dettagli-extra">
+                    ${not empty prodottoSingolo.colore ? prodottoSingolo.colore : ''} 
+                    ${not empty prodottoSingolo.formato ? ' | '.concat(prodottoSingolo.formato) : ''}
+                </p>
+                <p class="prezzo-grande">
+                    <fmt:formatNumber value="${prodottoSingolo.prezzo}" type="number" minFractionDigits="2" maxFractionDigits="2"/> &euro;
+                </p>
+            </div>
             
-            <h3>Descrizione:</h3>
-            <p class="descrizione-testo">${not empty prodottoSingolo.descrizione ? prodottoSingolo.descrizione : 'Nessuna descrizione disponibile.'}</p>
+            <div class="info-descrizione">
+                <h3>Descrizione</h3>
+                <p class="descrizione-testo">${not empty prodottoSingolo.descrizione ? prodottoSingolo.descrizione : 'Nessuna descrizione disponibile per questo prodotto.'}</p>
+            </div>
 
-            <form action="${pageContext.request.contextPath}/CarrelloServlet" method="post" class="form-acquisto">
-             <input type="hidden" name="action" value="aggiungi">
-             <input type="hidden" name="id" value="${prodottoSingolo.id}">
+            <form action="${pageContext.request.contextPath}/CarrelloServlet" method="post" class="form-acquisto form-ajax">
+                <input type="hidden" name="action" value="aggiungi">
+                <input type="hidden" name="id" value="${prodottoSingolo.id}">
+                <input type="hidden" name="ajax" value="true">
     
-             <label for="quantita">Quantità:</label>
-
-             <input type="number" name="quantita" id="quantita" value="1" min="1" max="${prodottoSingolo.quantita}" class="input-quantita">
-    
-             <button type="submit" class="btn-carrello btn-grande">Aggiungi al Carrello</button>
+                <div class="add-to-cart-wrapper">
+                    <div class="quantita-box">
+                        <label for="quantita">Quantità:</label>
+                        <input type="number" name="quantita" id="quantita" value="1" min="1" max="${prodottoSingolo.quantita}" class="input-quantita">
+                    </div>
+        
+                    <button type="submit" class="btn-primary btn-grande">Aggiungi al Carrello</button>
+                </div>
             </form>
+            
         </div>
-
     </div>
 </div>
 

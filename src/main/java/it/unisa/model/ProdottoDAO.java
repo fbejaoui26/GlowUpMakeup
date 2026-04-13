@@ -20,6 +20,7 @@ public class ProdottoDAO {
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
+            connection.setAutoCommit(false);
             
             preparedStatement.setString(1, product.getNome());
             preparedStatement.setString(2, product.getDescrizione());
@@ -33,9 +34,8 @@ public class ProdottoDAO {
             preparedStatement.setString(10, product.getMarchio());
 
             preparedStatement.executeUpdate();
-
-            // rende le modifiche permanenti
             connection.commit();
+
         } finally {
             try {
                 if (preparedStatement != null)
@@ -184,11 +184,15 @@ public class ProdottoDAO {
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
+            connection.setAutoCommit(false);
+            
             preparedStatement = connection.prepareStatement(updateSQL);
             preparedStatement.setBoolean(1, isCancellato);
             preparedStatement.setInt(2, id);
 
             preparedStatement.executeUpdate();
+            connection.commit();
+            
         } finally {
             try {
                 if (preparedStatement != null) preparedStatement.close();
@@ -214,6 +218,7 @@ public class ProdottoDAO {
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(query.toString());
             
             preparedStatement.setString(1, product.getNome());

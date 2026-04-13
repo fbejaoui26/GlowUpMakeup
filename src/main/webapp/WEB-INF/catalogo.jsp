@@ -4,16 +4,21 @@
 
 <jsp:include page="/WEB-INF/header.jsp" />
 
+<div class="page-header">
+    <h1>Il nostro Catalogo</h1>
+    <p>Trova i prodotti perfetti per la tua routine di bellezza.</p>
+</div>
+
 <div class="catalogo-container">
     
     <aside class="sidebar-categorie">
-        <h3 class="sidebar-title">Esplora per Categoria:</h3>
+        <h3 class="sidebar-title">Filtra per:</h3>
         
         <ul class="lista-categorie">
             <li class="cat-item">
                 <a href="${pageContext.request.contextPath}/CatalogoServlet" 
                    class="cat-link ${empty categoriaSelezionata ? 'active' : ''}">
-                   ✨ Tutti i Prodotti
+                   Tutti i Prodotti
                 </a>
             </li>
             
@@ -52,7 +57,7 @@
                                 </p>
                             </a>
                             
-                            <form action="${pageContext.request.contextPath}/CarrelloServlet" method="post" class="form-ajax form-carrello-card">
+                            <form action="${pageContext.request.contextPath}/CarrelloServlet" method="post" class="form-ajax" style="margin-top: auto;">
                                 <input type="hidden" name="action" value="aggiungi">
                                 <input type="hidden" name="id" value="${p.id}">
                                 <input type="hidden" name="quantita" value="1">
@@ -66,9 +71,9 @@
                 </c:when>
                 
                 <c:otherwise>
-                    <div class="empty-category">
-                        <p class="empty-category-text">Nessun prodotto disponibile in questa categoria al momento. 😢</p>
-                        <a href="${pageContext.request.contextPath}/CatalogoServlet" class="btn-carrello">Torna a tutti i prodotti</a>
+                    <div class="empty-state">
+                        <p>Nessun prodotto disponibile in questa categoria al momento.</p>
+                        <a href="${pageContext.request.contextPath}/CatalogoServlet" class="btn-primary">Torna al catalogo completo</a>
                     </div>
                 </c:otherwise>
             </c:choose>

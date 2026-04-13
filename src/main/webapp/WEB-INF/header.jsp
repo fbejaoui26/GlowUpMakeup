@@ -6,53 +6,68 @@
 <head>
     <meta charset="UTF-8">
     <title>GlowUp Makeup</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 <body>
 
-<header>
-    <div class="logo">✨ GlowUp Makeup</div>
-<nav>
-       <div class="user-menu">
-           <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>
-           <a href="${pageContext.request.contextPath}/CatalogoServlet">Catalogo</a>
-           
-           <%-- IL CARRELLO (nascosto per gli admin) --%>
-           <c:if test="${empty utenteLoggato or not utenteLoggato.admin}">
-               <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link">
-                   Carrello 🛒
-                   <c:choose>
-                       <c:when test="${not empty carrello and carrello.numeroElementiTotali > 0}">
-                           <span id="badge-carrello" class="badge-carrello">${carrello.numeroElementiTotali}</span>
-                       </c:when>
-                       <c:otherwise>
-                           <span id="badge-carrello" class="badge-carrello" style="display: none;">0</span>
-                       </c:otherwise>
-                   </c:choose>
-               </a>
-           </c:if>
+<header class="site-header">
+    <div class="header-container">
+        
+        <div class="logo">
+            <a href="${pageContext.request.contextPath}/HomeServlet">GlowUp Makeup</a>
+        </div>
 
-           <%-- GESTIONE LOGIN/PROFILO --%>
-           <c:choose>
-               <c:when test="${not empty utenteLoggato}">
-                   <c:choose>
-                       <c:when test="${utenteLoggato.admin}">
-                           <a href="${pageContext.request.contextPath}/AdminDashboard" class="link-profilo" title="Vai alla Dashboard">⚙️ Admin: ${utenteLoggato.nome}</a>
-                       </c:when>
-                       <c:otherwise>
-                           <a href="${pageContext.request.contextPath}/ProfiloServlet" class="link-profilo" title="Vai al tuo profilo">Ciao, ${utenteLoggato.nome}!</a>
-                       </c:otherwise>
-                   </c:choose>
-                   <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
-               </c:when>
+        <nav class="main-nav">
+            <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>
+            <a href="${pageContext.request.contextPath}/CatalogoServlet">Catalogo</a>
+        </nav>
+
+        <div class="user-actions">
+            <%-- GESTIONE LOGIN/PROFILO --%>
+            <c:choose>
+                <c:when test="${not empty utenteLoggato}">
+                    <c:choose>
+                        <c:when test="${utenteLoggato.admin}">
+                            <a href="${pageContext.request.contextPath}/AdminDashboard" title="Dashboard">
+                                <i class="fa-solid fa-gear"></i> Admin
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/ProfiloServlet" title="Profilo">
+                                <i class="fa-regular fa-user"></i> ${utenteLoggato.nome}
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="${pageContext.request.contextPath}/LogoutServlet" class="logout-link" title="Logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </c:when>
                <c:otherwise>
-                   <a href="${pageContext.request.contextPath}/LoginServlet">Login</a>
-                   <a href="${pageContext.request.contextPath}/RegistrazioneServlet">Registrati</a>
-               </c:otherwise>
-           </c:choose>
-       </div>
-    </nav>
+                    <a href="${pageContext.request.contextPath}/LoginServlet" title="Accedi">
+                        <i class="fa-regular fa-user"></i> Accedi
+                    </a>
+                    <a href="${pageContext.request.contextPath}/RegistrazioneServlet" title="Registrati">
+                        <i class="fa-solid fa-user-plus"></i> Registrati
+                    </a>
+                </c:otherwise>
+            </c:choose>
+
+            <%-- IL CARRELLO (nascosto per gli admin) --%>
+   <c:if test="${empty utenteLoggato or not utenteLoggato.admin}">
+    <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link" title="Carrello">
+        <i class="fa-solid fa-bag-shopping"></i>
+        
+        <%-- JSTL inietta la classe 'badge-nascosto' solo se necessario --%>
+        <span id="badge-carrello" class="badge-carrello ${empty carrello or carrello.numeroElementiTotali == 0 ? 'badge-nascosto' : ''}">
+            ${not empty carrello and carrello.numeroElementiTotali > 0 ? carrello.numeroElementiTotali : '0'}
+        </span>
+        
+    </a>
+</c:if>
+        </div>
+
+    </div>
 </header>
 
 <div class="container">

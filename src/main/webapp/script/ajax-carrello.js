@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 const badge = document.getElementById('badge-carrello');
                 if (badge) {
                     badge.textContent = data.totaleElementi;
-                    badge.style.display = 'inline-block';
 
-                    badge.style.transform = 'scale(1.3)';
-                    setTimeout(() => badge.style.transform = 'scale(1)', 200);
-                }
+               badge.classList.remove('badge-nascosto');
+
+               badge.style.transform = 'scale(1.3)';
+               setTimeout(() => badge.style.transform = 'scale(1)', 200);
+              }
             })
             .catch(error => {
                 console.error("Errore AJAX:", error);

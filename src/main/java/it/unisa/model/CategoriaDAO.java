@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CategoriaDAO {
 
-    // Recupera tutte le categorie dal database
+    // recupera tutte le categorie dal database
     public List<Categoria> doRetrieveAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
