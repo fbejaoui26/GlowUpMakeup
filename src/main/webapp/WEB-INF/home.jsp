@@ -20,7 +20,6 @@
         <span>MAYBELLINE</span>
         <span>ESSENCE</span>
         <span>ASTRA</span>
-        <span>L'ORÉAL</span>
     </div>
 </section>
 
