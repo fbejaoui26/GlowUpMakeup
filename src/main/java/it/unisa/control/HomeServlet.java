@@ -22,8 +22,7 @@ public class HomeServlet extends HttpServlet {
         
         try {
      
-            Collection<Prodotto> prodotti = dao.doRetrieveAll(null);
-            
+            Collection<Prodotto> prodotti = dao.doRetrieveAll(null);        
             request.setAttribute("prodotti", prodotti);
             
         } catch (SQLException e) {

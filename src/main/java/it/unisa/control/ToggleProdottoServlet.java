@@ -24,9 +24,8 @@ public class ToggleProdottoServlet extends HttpServlet {
         if (admin == null || !admin.isAdmin()) {
             response.sendRedirect(request.getContextPath() + "/HomeServlet");
             return;
-        }
-
-        try {
+            
+        } try {
             
             int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
             boolean statoAttuale = Boolean.parseBoolean(request.getParameter("statoAttuale"));

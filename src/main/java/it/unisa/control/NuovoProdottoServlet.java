@@ -22,7 +22,7 @@ public class NuovoProdottoServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/HomeServlet");
             return;
         }
-
+        
         request.getRequestDispatcher("/WEB-INF/nuovo-prodotto.jsp").forward(request, response);
     }
 }
